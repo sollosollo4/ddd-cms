@@ -6,7 +6,7 @@ use App\Models\UsersRefreshToken;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
-class UsersRefreshTokenRepository implements UsersRefreshTokenRepositoryInterface
+class UsersRefreshTokenRepository implements UsersRefreshTokenRepositoryContract
 {
     public function setByUserId(int $userId): UsersRefreshToken
     {

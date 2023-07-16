@@ -3,7 +3,7 @@
 namespace App\Services\Authentication;
 
 use App\Http\Request\Forms\Login\WebLoginRequest;
-use App\Repositories\UsersRefreshToken\UsersRefreshTokenRepositoryInterface;
+use App\Repositories\UsersRefreshToken\UsersRefreshTokenRepositoryContract;
 use App\Services\Authentication\AuthenticationServiceData;
 use Carbon\Carbon;
 use Cookie;
@@ -11,7 +11,7 @@ use Exception;
 
 class AuthenticationService
 {
-    public function __construct(private UsersRefreshTokenRepositoryInterface $usersRefreshTokenRepositoryInterface)
+    public function __construct(private UsersRefreshTokenRepositoryContract $usersRefreshTokenRepository)
     {
 
     }
@@ -23,7 +23,7 @@ class AuthenticationService
 
         $tokenExpireAt = Carbon::now()->addMinutes($minutes);
 
-        $refreshToken = $this->usersRefreshTokenRepositoryInterface->setByUserId(auth()->user()->id);
+        $refreshToken = $this->usersRefreshTokenRepository->setByUserId(auth()->user()->id);
         $refreshCookie = Cookie::make(name: 'refreshToken', value: $refreshToken, minutes: config('jwt.refresh_ttl'), path: null, domain: config('session.domain'), secure: true, httpOnly: true, raw: false, sameSite: 'none');
         return new AuthenticationServiceData(
             accessToken: $accessToken,
@@ -39,7 +39,7 @@ class AuthenticationService
         if(!$refreshToken) {
             throw new Exception("refreshToken had null");
         }
-        $usersRefreshTokenModel = $this->usersRefreshTokenRepositoryInterface->getToken($refreshToken);
+        $usersRefreshTokenModel = $this->usersRefreshTokenRepository->getToken($refreshToken);
 
         return auth()->tokenById($usersRefreshTokenModel->user_id);
     }

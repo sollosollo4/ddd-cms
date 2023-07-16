@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Throwable;
@@ -28,6 +29,10 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->baseController = new Controller();
+
+        $this->renderable(function(AuthenticationException $e){
+            return $this->baseController->sendError([$e->getMessage()], 401);
+        });
 
         $this->renderable(function (Throwable $e) {
             return $this->baseController->sendException($e);
