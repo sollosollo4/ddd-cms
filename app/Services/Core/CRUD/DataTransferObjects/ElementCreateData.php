@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services\Core\CRUD\DataTransferObjects;
+
 use App\Contracts\DataContract;
 use Carbon\Carbon;
 

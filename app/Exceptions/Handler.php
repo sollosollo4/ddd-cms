@@ -30,7 +30,7 @@ class Handler extends ExceptionHandler
     {
         $this->baseController = new Controller();
 
-        $this->renderable(function(AuthenticationException $e){
+        $this->renderable(function (AuthenticationException $e) {
             return $this->baseController->sendError([$e->getMessage()], 401);
         });
 

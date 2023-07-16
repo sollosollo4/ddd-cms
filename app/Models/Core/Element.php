@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Core;
+
 use App\Models\Core\ElementType;
 use App\Models\Core\Section;
 use App\Models\Core\Setting;

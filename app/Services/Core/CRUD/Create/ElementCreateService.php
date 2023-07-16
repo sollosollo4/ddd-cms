@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services\Core\CRUD\Create;
+
 use App\Contracts\DataContract;
 use App\Http\Request\Forms\BaseForm;
 use App\Repositories\Core\Element\ElementRepositoryContract;
@@ -11,7 +12,7 @@ class ElementCreateService implements ServiceCrudExecuteContract
 {
     public function __construct(private ElementRepositoryContract $elementRepository)
     {
-        
+
     }
 
     public function execute(BaseForm $request): DataContract

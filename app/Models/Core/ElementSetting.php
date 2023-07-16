@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Core;
+
 use App\Models\Core\Element;
 use App\Models\Core\Setting;
 use Illuminate\Database\Eloquent\Model;
