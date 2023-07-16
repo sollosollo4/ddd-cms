@@ -31,7 +31,7 @@ Route::middleware('jwtAuth:web')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('element')->group(function(){
+    Route::prefix('element')->group(function () {
         Route::post('/', [ElementController::class, 'store'])->name('store');
     });
 });
